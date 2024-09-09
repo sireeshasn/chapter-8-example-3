@@ -20,7 +20,8 @@ spec:
     spec:
       containers: 
       - name: video-streaming
-        image: sireesha.azurecr.io/flixtube:latest
+        image: sireesha.azurecr.io/video-streaming:036e962daae72789eefd30fa531408c6754f312a
+
         imagePullPolicy: IfNotPresent
         env:
         - name: PORT
