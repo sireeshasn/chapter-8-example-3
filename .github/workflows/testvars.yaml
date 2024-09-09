@@ -1,0 +1,21 @@
+name: test vars
+
+on:
+  workflow_dispatch:
+jobs:
+  display_vars:
+    runs-on: ubuntu-latest
+    environment:
+      name: testvars
+    env:
+      NAME: ${{ vars.TEST_NAME }}
+      VERSION: ${{ vars.VERSION }}
+      SECRET_NAME: ${{ secrets.NAME }}
+      SECRET_VERSION: ${{ secrets.VERSION}}
+    steps:
+    - name: use env vars
+      run: |
+        echo "This is test name: $NAME"
+        echo "This is the version: $VERSION"
+        echo "This is a secret name: $SECRET_NAME"
+        echo "This is a secret version: $SECRET_VERSION"

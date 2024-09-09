@@ -32,11 +32,6 @@ jobs:
       REGISTRY_PW: ${{ secrets.REGISTRY_PW  }}
 
     steps:
-      # Set up Node.js v20 (if needed)
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-      
       # Checks-out your repository under $GITHUB_WORKSPACE.
       - uses: actions/checkout@v3
 
