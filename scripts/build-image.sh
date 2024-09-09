@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Builds a Docker image.
 #
@@ -11,8 +13,14 @@
 #       ./scripts/build-image.sh
 #
 
-set -u # or set -o nounset
+# Treat unset variables as an error
+set -u
+
+# Ensure required environment variables are set
 : "$CONTAINER_REGISTRY"
 : "$VERSION"
 
-docker build -t $CONTAINER_REGISTRY/video-streaming:$VERSION --file ./Dockerfile-prod .
+# Build the Docker image, and specify the current directory (.) as the build context
+docker buildx build -t $CONTAINER_REGISTRY/video-streaming:$VERSION --file ./Dockerfile-prod .
+
+echo "Docker image built successfully!"
