@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Deploys the Node.js microservice to Kubernetes.
 #
@@ -13,8 +15,14 @@
 #   ./scripts/deploy.sh
 #
 
+# Exit script if any command fails or if an unset variable is used
 set -u # or set -o nounset
-: "$CONTAINER_REGISTRY"
-: "$VERSION"
 
+# Ensure required environment variables are set
+: "${CONTAINER_REGISTRY:?Environment variable CONTAINER_REGISTRY must be set}"
+: "${VERSION:?Environment variable VERSION must be set}"
+
+# Deploy using kubectl and envsubst to replace variables in the YAML file
 envsubst < ./scripts/kubernetes/deploy.yaml | kubectl apply -f -
+
+echo "Deployment successful!"
